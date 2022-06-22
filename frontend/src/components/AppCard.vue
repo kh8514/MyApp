@@ -30,11 +30,10 @@ export default {
     setup() {
         const selected_appl_id = ref(-1)
         const onClickApplication = (one_data) => {
-        selected_appl_id.value = one_data.id
+            selected_appl_id.value = one_data.id
         }
 
         return {
-            
             onClickApplication,
             selected_appl_id 
         }

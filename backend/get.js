@@ -1,5 +1,5 @@
-module.exports.setup = (app, db) => {
-    app.get('/', (req, res, next) =>  {
+module.exports.setup = function (app, db) {
+    app.get('/', (req, res, next) => {
         res.json({ rsp: 'ok' })
     })
 
@@ -27,22 +27,57 @@ module.exports.setup = (app, db) => {
             }
         })
     })
-
+    
     app.get('/db/applications', (req, res, next) => {
         let result = {
             rsp: 'fail',
         }
-        db.all(
-            'SELECT * FROM tbl_applications ORDER BY date desc',
-            (err, rows) => {
+        db.all('SELECT * FROM tbl_applications ORDER BY date desc', (err, rows) => {
+            if (!err) {
+            result.rsp = 'ok'
+            result.data = rows
+            res.json(result)
+            } else {
+            res.json(result)
+            }
+        })
+    })
+    
+    app.get('/db/notification/:id', (req, res, next) => {
+        let result = {
+            rsp: 'fail',
+        }
+        db.get(
+            `SELECT * FROM tbl_notification WHERE expiration > date('now') AND id > ${req.params.id} ORDER BY id desc`,
+            (err, row) => {
                 if (!err) {
-                    result.rsp = 'ok'
-                    result.data = rows
+                    result.rsp = !row ? 'nodata' : 'ok'
+                    if (row) {
+                        result.data = row
+                    }
                     res.json(result)
                 } else {
+                    result.error = err.message
                     res.json(result)
                 }
+                console.log(result)
             }
         )
+    })
+    
+    app.get('/db/notifications/', (req, res, next) => {
+        let result = {
+            rsp: 'fail',
+        }
+        db.all('SELECT * FROM tbl_notification', (err, rows) => {
+            if (!err) {
+                result.rsp = 'ok'
+                result.data = rows
+                res.json(result)
+            } else {
+                result.error = err.message
+                res.json(result)
+            }
+        })
     })
 }

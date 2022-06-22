@@ -48,7 +48,8 @@
             "default",
             "Profile",
             "Card",
-            "Application"
+            "Application",
+            "Home"
           ]
         }
       ]
