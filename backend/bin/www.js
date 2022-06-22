@@ -51,9 +51,6 @@ let db = new sqlite3.Database('database.db', (err) => {
     }
 })
 
-app.listen(PORT, () => {
-    console.log(`Listening... ${PORT}`)
-})
 app.get('/', (req, res, next) => {
     res.json({ rsp: 'ok' })
 })
@@ -64,22 +61,24 @@ app.get('/db/about-me', (req, res, next) => {
     }
     db.get('SELECT * FROM tbl_about_myself', (err, row) => {
         if (!err) {
-        result.data = row
-        db.all('SELECT * FROM tbl_my_resume ORDER BY date desc', (err2, rows) => {
-            if (!err2) {
-            result.rsp = 'ok'
-            result.data.resume = rows
-            res.json(result)
-            } else {
-            res.json(result)
-            }
-        })
+            console.log(row)
+            result.data = row
+            db.all('SELECT * FROM tbl_my_resume ORDER BY date desc', (err2, rows) => {
+                if (!err2) {
+                    console.log(rows)
+                    result.rsp = 'ok'
+                    result.data.resume = rows
+                    res.json(result)           
+                } else {
+                    res.json(result)
+                }
+            })
         } else {
-        res.json(result)
+            res.json(result)
         }
     })
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`)
 })

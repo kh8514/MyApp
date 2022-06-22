@@ -12,30 +12,30 @@
             v-for="(d, index) in user_data.resume"
             :key="index"
         >
-            <Card :top="!index" :resume="d" :show="index % 2 == 1" />
-            <div class="col-sm-2 text-center flex-column d-none d-sm-flex">
-                <div class="row h-50">
-                    <div class="col" :class="[index ? 'border-right' : '']" />
-                    <div class="col" />
-                </div>
-                <h1>
+            
+        <Card :top="!index" :resume="d" :show="index % 2 == 1" />
+        <div class="col-sm-2 text-center flex-column d-none d-sm-flex">
+            <div class="row h-50">
+                <div class="col" :class="[index ? 'border-right' : '']" />
+                <div class="col" />
+            </div>
+            <h1>
                 <span
                     class="badge badge-pill border"
                     :class="[!index ? 'bg-primary text-light' : 'bg-light text-dark']"
-                    >{{ new Date(d.date).getFullYear() }}</span
                 >
-                </h1>
-                <div class="row h-50">
-                    <div
-                        class="col"
-                        :class="[
-                        index != user_data.resume.length - 1 ? 'border-right' : '',
-                        ]"
-                    />
-                    <div class="col" />
-                </div>
+                    {{ new Date(d.date).getFullYear() }}
+                </span>
+            </h1>
+            <div class="row h-50">
+                <div
+                    class="col"
+                    :class="[index != user_data.resume.length - 1 ? 'border-right' : '']"
+                />
+                <div class="col" />
             </div>
-            <Card :top="!index" :resume="d" :show="index % 2 == 0" />
+        </div>
+        <Card :top="!index" :resume="d" :show="index % 2 == 0" />
         </div>
     </div>
 </template>
@@ -52,20 +52,19 @@
             resume: Object,
             show: Boolean,
         },
-        setup(props){console.log(props)},
         template: `
             <div v-if="show" class="col-sm py-2">
-                <div class="card" :class="{'border-primary bg-primary text-light': top, shadow: top }">
+                <div :class="{'border-primary bg-primary text-align':top, shadow: top}">
                     <div class="card-body">
-                    <h4 class="card-title" :class="[top ? 'text-light' : 'text-muted']">{{ resume.title }}</h4>
-                    <hr/>
-                    <p class="card-text">{{ resume.content }}</p>
-                    <a v-if="resume.url != 'null'" :href="resume.url" target="_blank" :class="[top ? 'text-light' : 'text-primary']">link</a>
+                        <h4 class="card-title" :class="[top ? 'text-align': 'text-muted']">{{resume.title}}</h4>
+                        <hr/>
+                        <p class="card-text">{{ resume.content }}</p>
+                        <a v-if="resume.url != null" :href="resume.url" target="_blank" :class="[top ? 'text-light' : 'text-primary']"></a>
                     </div>
                 </div>
             </div>
             <div v-if="!show" class="col-sm"></div>
-            `,
+        `
     })
 
     export default {
