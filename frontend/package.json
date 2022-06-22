@@ -47,7 +47,8 @@
           "ignores": [
             "default",
             "Profile",
-            "Card"
+            "Card",
+            "Application"
           ]
         }
       ]
