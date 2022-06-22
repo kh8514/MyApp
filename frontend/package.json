@@ -49,7 +49,9 @@
             "Profile",
             "Card",
             "Application",
-            "Home"
+            "Home",
+            "Blog",
+            "Admin"
           ]
         }
       ]

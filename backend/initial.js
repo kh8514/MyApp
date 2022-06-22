@@ -91,6 +91,7 @@ function fn_notification(db) {
     db.run(
         'CREATE TABLE IF NOT EXISTS tbl_notification (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, expiration DATE, type TEXT)',
         (err) => {
+            console.log(err)
             if (!err) {
                 let query = 'DELETE from tbl_notification'
                 db.run(query)
