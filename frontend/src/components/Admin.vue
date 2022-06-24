@@ -3,6 +3,7 @@
         <div class="row text-end pe-sm-2">
         <small><a href="#" @click="onLogout">Logout</a></small>
         </div>
+        <editor />
     </div>
     <div v-else-if="state == 'loading'">Loading...</div>
     <login v-else :email="email" :type="state" @state="state = 'ok'" />
@@ -12,6 +13,7 @@
 <script>
 import { ref, onBeforeMount } from 'vue'
 import Login from './Login.vue'
+import Editor from './Editor.vue'
 import { getCookie, setCookie } from '../modules/cookie'
 import useLogin from '../modules/login';
 export default {
@@ -53,7 +55,7 @@ export default {
         }
         return { state, email, onLogout }
     },
-    components: { Login },
+    components: { Login, Editor },
 }
 </script>
 

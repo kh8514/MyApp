@@ -138,8 +138,7 @@ export default {
                     new_password1.value = new_password2.value = ''
                 } else {
                     updatePassword(pEmail.value, password.value, new_password1.value)
-                        .then((data) => {
-                            console.log(data)
+                        .then(() => {
                             is_login_form.value = true
                         })
                         .catch((data) => {

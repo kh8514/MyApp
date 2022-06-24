@@ -8,6 +8,7 @@ const put = require('../put.js')
 const initial = require('../initial.js')
 
 const app = express()
+app.use(express.json())
 app.disable('x-powered-by')
 app.use(cors())
 app.use('/assets', express.static('assets'))
