@@ -51,7 +51,8 @@
             "Application",
             "Home",
             "Blog",
-            "Admin"
+            "Admin",
+            "Login"
           ]
         }
       ]
