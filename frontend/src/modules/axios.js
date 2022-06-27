@@ -17,7 +17,6 @@ export default () => {
             }
         } else {
             if (onFailed) {
-                console.log(resp)
                 onFailed(resp.data)
             }
         }

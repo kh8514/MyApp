@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import { setCookie, getCookie } from '../modules/cookie'
 import useLogin from '../modules/login.js'
 
@@ -105,6 +105,16 @@ export default {
         const invalid = ref('ok')
         const { login, updatePassword } = useLogin()
 
+        const toast = inject('toast', '')
+
+        const msg = (type) =>{
+            return {
+                wrong_password: '비밀번호가 틀렸습니다.',
+                diff_passwords: '새로운 비밀번호가 다릅니다.'
+
+            }[type]
+        }
+
         stay.value = getCookie('stay') == 'true'
 
         const onSubmit = (evt) =>{
@@ -129,6 +139,7 @@ export default {
                         context.emit('state')
                     })
                     .catch((data) => {
+                        toast.value = msg(data.rsp)
                         invalid.value = data.rsp
                     })
             } else {
